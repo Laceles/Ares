@@ -29,6 +29,10 @@ for col in cursor.description:
     colunas.append(col[0])
 print(colunas)
 
+# Consulta SQL para obter os dados
+query = "SELECT * FROM air_toxicity_test;"
+df = pd.read_sql_query(query, conexao)
+
 attest = pd.DataFrame(data=dados, columns=colunas)
 print(attest)
 

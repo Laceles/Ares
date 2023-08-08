@@ -37,5 +37,18 @@ attest = pd.DataFrame(data=dados, columns=colunas)
 print(attest)
 
 append = conexao.cursor()
-for index, row in attest.iterrows:
-    append.execute(f"insert into haps values({row})")
+for index, row in file1.iterrows():
+    try:
+        append.execute(
+            f"insert into haps values({list(row.values)})".replace("[", "").replace(
+                "]", ""
+            )
+        )
+        conexao.commit()
+    except:
+        # Em caso de erro, desfaz a transação
+        conexao.rollback()
+        print(f"Erro ao inserir dados: {Exception}")
+
+append.close()
+conexao.close()
